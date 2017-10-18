@@ -19,13 +19,14 @@ import utils as utils
 # Training Parameters
 learning_rate = 0.001
 num_steps = 2000
-batch_size = 128
+batch_size = 128 # batches is the num of samples going through each training phase
 
 # Network Parameters
 num_input = 784 # MNIST data input (img shape: 28*28)
 num_classes = 10 # MNIST total classes (0-9 digits)
 dropout = 0.75 # Dropout, probability to keep units
 
+done = False
 
 # Create the neural network
 def conv_net(x_dict, n_classes, dropout, reuse, is_training):
@@ -101,6 +102,7 @@ def model_fn(features, labels, mode):
         eval_metric_ops={'accuracy': acc_op})
 
     return estim_specs
+
 
 # Build the Estimator
 model = tf.estimator.Estimator(model_fn)
