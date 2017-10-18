@@ -4,6 +4,24 @@ import numpy as np
 from sklearn.metrics import confusion_matrix
 import time
 from datetime import timedelta
+from tensorflow.examples.tutorials.mnist import input_data
+
+data = input_data.read_data_sets('data/MNIST/', one_hot=True)
+data.test.cls = np.argmax(data.test.labels, axis=1)
+
+img_size = 28  # 28px
+img_size_flat = img_size * img_size
+img_shape = (img_size, img_size)
+num_channels = 1  # gray-scale
+num_classes = 10  # 10 digits
+
+train_batch_size = 64
+
+# Counter for total number of iterations performed so far.
+total_iterations = 0
+
+# Split the test-set into smaller batches of this size.
+test_batch_size = 256
 
 
 def plot_images(images, cls_true, cls_pred=None):
@@ -47,7 +65,7 @@ def get_weights_variable(layer_name):
     return variable
 
 
-def optimize(num_iterations):
+def optimize(session, x, y_true, num_iterations, accuracy, optimizer):
     # Ensure we update the global variable rather than a local copy.
     global total_iterations
 
@@ -156,7 +174,8 @@ def plot_confusion_matrix(cls_pred):
     plt.show()
 
 
-def print_test_accuracy(show_example_errors=False, show_confusion_matrix=False):
+def print_test_accuracy(session, x, y_true, y_pred_cls, show_example_errors=False, show_confusion_matrix=False):
+
 
     # Number of images in the test-set.
     num_test = len(data.test.images)
