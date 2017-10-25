@@ -1,8 +1,6 @@
 import tensorflow as tf
-import numpy as np
 import utils as utils
 import prettytensor as pt
-from tensorflow.examples.tutorials.mnist import input_data
 
 img_size = 28  # 28px
 img_size_flat = img_size * img_size
