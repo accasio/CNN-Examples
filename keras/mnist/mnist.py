@@ -12,6 +12,8 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 
+keras.backend.clear_session()
+
 batch_size = 128
 num_classes = 10
 epochs = 12
