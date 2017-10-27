@@ -241,24 +241,3 @@ def print_test_accuracy(session, x, y_true, y_pred_cls, show_example_errors=Fals
         plot_confusion_matrix(cls_pred=cls_pred)
 
 
-def plot_training_curve(training, test):
-    plt.plot(training)
-    plt.plot(test)
-    plt.title('Model Accuracy')
-    plt.ylabel('Accuracy')
-    plt.xlabel('Epoch')
-    plt.grid(True)
-    plt.legend(['Train', 'Test'], loc='upper left')
-    plt.show()
-
-
-def plot_loss_curve(training, test):
-    plt.plot(training)
-    plt.plot(test)
-    plt.title('Model Loss')
-    plt.ylabel('Loss')
-    plt.xlabel('Epoch')
-    plt.grid(True)
-    plt.legend(['Train', 'Test'], loc='upper left')
-    plt.show()
-

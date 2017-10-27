@@ -1,21 +1,21 @@
 from __future__ import print_function
 
 import keras
-import utils
+import cnn_utils
 from keras.datasets import cifar10
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 
 import os
 
 batch_size = 128
 num_classes = 10
-epochs = 12
+epochs = 100
 save_dir = os.path.join(os.getcwd(), 'saved_models')
 model_name = 'keras_cifar10_trained_model.'
 
-# The data, shuffled and split between train and test sets:
+ # The data, shuffled and split between train and test sets:
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 print('x_train shape:', x_train.shape)
 print(x_train.shape[0], 'train samples')
@@ -59,5 +59,5 @@ model_path = os.path.join(save_dir, model_name + str(score[1]))
 model.save(model_path)
 print('Saved trained model at %s ' % model_path)
 
-utils.plot_training_curve(history.history['acc'], history.history['val_acc'])
-utils.plot_training_curve(history.history['acc'], history.history['val_acc'])
+cnn_utils.plot_curve(history.history['acc'], history.history['val_acc'], 'learning')
+cnn_utils.plot_curve(history.history['acc'], history.history['val_acc'], 'loss')
