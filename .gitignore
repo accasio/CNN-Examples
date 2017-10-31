@@ -3,3 +3,4 @@ __pycache__/
 *.idea
 **/data/
 **/saved_models/
+.floydexpt
