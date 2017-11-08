@@ -69,7 +69,7 @@ def plot_scatter_filters(x, y, graph_type):
     plt.clf()
 
 
-def plot_model_history(model_history, density):
+def plot_model_history(model_history, end):
     fig, axs = plt.subplots(1, 2, figsize=(15, 5))
     # summarize history for accuracy
     axs[0].plot(range(1, len(model_history.history['acc'])+1), model_history.history['acc'])
@@ -87,6 +87,13 @@ def plot_model_history(model_history, density):
     axs[1].set_xlabel('Epoch')
     axs[1].set_xticks(np.arange(1, len(model_history.history['loss'])+1), len(model_history.history['loss'])/10)
     axs[1].legend(['train', 'val'], loc='best')
-    plt.savefig('/output/accuracy_and_loss_' + str(density))
-    plt.clf()
+    plt.savefig('/output/accuracy_and_loss_' + end)
 
+
+def accuracy(test_x, test_y, model):
+    result = model.predict(test_x)
+    predicted_class = np.argmax(result, axis=1)
+    true_class = np.argmax(test_y, axis=1)
+    num_correct = np.sum(predicted_class == true_class)
+    accuracy = float(num_correct)/result.shape[0]
+    return (accuracy * 100)
