@@ -1,5 +1,7 @@
-from __future__ import print_function
-
+from numpy.random import seed
+seed(1)
+from tensorflow import set_random_seed
+set_random_seed(2)
 import cnn_utils
 import keras
 from keras.constraints import maxnorm
@@ -10,7 +12,6 @@ from keras.layers import Conv2D, MaxPooling2D, Activation
 
 import os
 
-densities = [1024, 2048, 3082, 4096, 5120]
 acc_scores = []
 loss_scores = []
 
@@ -70,8 +71,9 @@ model.compile(loss=keras.losses.categorical_crossentropy,
 
 history = model.fit(x_train, y_train,
                     batch_size=batch_size,
-                    epochs=epochs,
-                    verbose=1,
+                    epochs=3,
+                    verbose=2,
+                    shuffle=False,
                     validation_data=(x_test, y_test))
 score = model.evaluate(x_test, y_test, verbose=1)
 print('Test loss:', score[0])
